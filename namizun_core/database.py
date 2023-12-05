@@ -3,7 +3,7 @@ from os import system, path
 from random import randint
 
 parameters = [
-    'fake_udp_uploader_running',
+    'fake_tcp_uploader_running',
     'coefficient_buffer_size', 'coefficient_uploader_threads_count', 'coefficient_buffer_sending_speed',
     'range_ips', 'in_submenu', 'coefficient_limitation',
     'total_upload_cache', 'total_download_cache', 'download_amount_synchronizer', 'upload_amount_synchronizer']
@@ -28,7 +28,7 @@ def get_default(key):
         else:
             system('cp /var/www/namizun/else/range_ips /var/www/namizun/')
             return open('/var/www/namizun/range_ips').read()
-    elif key == 'fake_udp_uploader_running':
+    elif key == 'fake_tcp_uploader_running':
         return True
     elif key == 'coefficient_buffer_size':
         return 1
