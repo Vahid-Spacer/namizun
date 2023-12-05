@@ -2,7 +2,7 @@ from namizun_core import database
 from random import uniform, randint
 from time import sleep
 from namizun_core.network import get_network_io, get_system_network_io
-from namizun_core.udp import multi_udp_uploader
+from namizun_core.tcp import multi_tcp_uploader
 from namizun_core.ip import cache_ip_ports_from_database
 from namizun_core.time import get_now_hour
 from namizun_core.log import store_restart_namizun_uploader_log, store_new_upload_loop_log
@@ -49,13 +49,13 @@ store_restart_namizun_uploader_log()
 
 while True:
     database.set_parameters_to_cache()
-    if database.get_cache_parameter('fake_udp_uploader_running'):
+    if database.get_cache_parameter('fake_tcp_uploader_running'):
         cache_ip_ports_from_database()
         total_upload_size = remain_upload_size = get_network_usage()
         total_uploader = remain_uploader = get_uploader_count_base_timeline()
         store_new_upload_loop_log(total_uploader, total_upload_size)
         while remain_uploader > 0 and remain_upload_size > 0.1 * total_upload_size:
-            uploader_count, upload_size_for_each_ip = multi_udp_uploader(0.3 * total_upload_size, total_uploader)
+            uploader_count, upload_size_for_each_ip = multi_tcp_uploader(0.3 * total_upload_size, total_uploader)
             if uploader_count == 0:
                 remain_uploader -= 1
             else:
