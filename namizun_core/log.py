@@ -30,10 +30,10 @@ def store_new_upload_agent_log(uploader_count, upload_size_for_each_ip):
     file.close()
 
 
-def store_new_udp_uploader_log(started_at, target_ip, target_port, upload_size, ended_at):
+def store_new_tcp_uploader_log(started_at, target_ip, target_port, upload_size, ended_at):
     file = open('/var/www/namizun/namizun.log', 'a')
     file.write(f"date: {get_now_date()} - "
-               f"udp uploader - "
+               f"tcp uploader - "
                f"[start: {started_at} - "
                f"ip: {target_ip} - "
                f"port: {target_port} - "
